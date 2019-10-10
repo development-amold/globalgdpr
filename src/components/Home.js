@@ -46,7 +46,7 @@ export class Home extends Component {
     // this.getLocation();
 
     let compDidThis = this;
-    let confirmDiaglog = window.confirm('We use your IP address to better understand your needs, improve performance and provide you with personalised content and advertisements. To allow us to provide a better and more tailored experience, please click the "OK" Button.');
+    let confirmDiaglog = window.confirm('We use your IP address to better understand your needs, improve performance and provide you with personalised content and advertisements. To allow us to provide a better and more tailored experience, please click the "OK" Button.'); 
     if (confirmDiaglog){
       // debugger;
       axios.get(`https://api.ipify.org/?format=json`,{}).then((resp)=>{
