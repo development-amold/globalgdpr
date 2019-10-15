@@ -29,9 +29,13 @@ export class Home extends Component {
 
   componentDidMount(){
     // this.getLocation();
+    let compDidThis = this;
     let confirmDiaglog = window.confirm('We use your IP address to better understand your needs, improve performance and provide you with personalised content and advertisements. To allow us to provide a better and more tailored experience, please click the "OK" Button.'); 
     if (confirmDiaglog){
       this.setIPStack();
+    }
+    else {
+      compDidThis.setState({current_ip: 'ipdenied'})
     }
   }
 
@@ -48,7 +52,7 @@ export class Home extends Component {
       }
     }).catch((error)=>{
       alert("There is an error in API call.");
-    })    
+    })
   }
 
   homehandleChange = (selectedipAdd) => {
@@ -62,7 +66,7 @@ export class Home extends Component {
   }
   
   render(){
-    if (this.state.current_ip){
+    if (this.state.current_ip && this.state.current_ip !== 'ipdenied'){
       return(
         <div>
           <Container maxWidth="lg">
@@ -90,10 +94,16 @@ export class Home extends Component {
         </div>
       );
     }
-    else{
+    else if (this.state.current_ip && this.state.current_ip === 'ipdenied'){
       return (
         <Container maxWidth="lg"><p>You are denied to access the content.</p></Container>
       );
+    }
+    else
+    {
+      return(
+        <Container maxWidth="lg"><p>Loading...</p></Container>
+      )
     }
   }
 }
